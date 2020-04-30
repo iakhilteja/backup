@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"
+      integrity="sha256-bd8XIKzrtyJ1O5Sh3Xp3GiuMIzWC42ZekvrMMD4GxRg="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <style>
+    img {
+      border-radius: 90%;
+    }
+  </style>
+
+  <body>
+    <center>
+      <br />
+      <br />
+      <h3>
+        <label for="gitusername">Enter the GitHub username:</label>
+        <input type="text" id="gitusername" name="gitusername" />
+        <input type="Submit" onclick="uname()" />
+        <input type="Reset" onclick="reset()" />
+      </h3>
+      <div id="data">
+        <!-- <a href="" target="_blank">
+          <button type="button">Git Profile</button>
+        </a> -->
+      </div>
+    </center>
+  </body>
+  <script>
+    function uname() {
+      reset();
+      var username = document.getElementById("gitusername").value;
+      axios.get(`https://api.github.com/users/${username}`).then((response) => {
+          const {avatar_url,login,followers,following,html_url} = response.data;
+        var x = document.createElement("img");
+        x.setAttribute("src", `${avatar_url}`);
+        x.setAttribute("width", "170");
+        x.setAttribute("height", "170");
+        x.setAttribute("alt", "Github Profile");
+        document.getElementById("data").appendChild(x);
+        document
+          .getElementById("data")
+          .appendChild(document.createElement("br"));
+        var para = document.createElement("p");
+        var node = document.createTextNode(`${login}`);
+        para.appendChild(node);
+        document.getElementById("data").appendChild(para);
+        var para2 = document.createElement("p");
+        var node2 = document.createTextNode(`Followers : ${followers} `);
+        para2.appendChild(node2);
+        document.getElementById("data").appendChild(para2);
+        var para3 = document.createElement("p");
+        var node3 = document.createTextNode(`Following  : ${following}`);
+        para3.appendChild(node3);
+        var btn = document.createElement("button");
+        document.getElementById("data").appendChild(para3);
+        var link = document.createElement("a");
+        var linknode = document.createTextNode("GitHub Profile");
+        link.appendChild(linknode);
+        link.setAttribute("href", `${html_url}`);
+        link.setAttribute("target", "_blank");
+        document.getElementById("data").appendChild(link);
+      });
+
+    }
+    function reset() {
+      document.getElementById("data").innerHTML = "";
+    //   document.getElementById('gitusername').value=''
+    }
+  </script>
+</html>

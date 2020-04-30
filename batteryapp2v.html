@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    
+      <h1 style="text-align: center;">Know Your Battery Status here</h1>
+      <br />
+      <div  style="text-align: center;">  
+      <h2>
+        Your current battery status is : <br />
+        <p id="batterylvl"></p>
+        <meter id="batterymeter"> </meter>
+      </h2>
+    </div>
+  </body>
+
+  <script>
+    navigator.getBattery().then(function (battery) {
+      var val = battery.level * 100;
+      var k = val.fixed();
+      if (k <30){
+        console.log("Plugin charger");
+      } 
+      else if (k>70){
+        console.log("Efficient battery stored")
+      }
+      document.getElementById("batterylvl").innerHTML = k + " % ";
+      document.getElementById("batterymeter").k = battery.level;
+    });
+  </script>
+</html>
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    
+      <h1 style="text-align: center;">Know Your Battery Status here</h1>
+      <br />
+      <div  style="text-align: center;">  
+      <h2>
+        Your current battery status is : <br />
+        <p id="batterylvl"></p>
+        <meter id="batterymeter"> </meter>
+      </h2>
+    </div>
+  </body>
+
+  <script>
+    navigator.getBattery().then(function (battery) {
+      var val = battery.level * 100;
+
+      document.getElementById("batterylvl").innerHTML = val.toFixed() + " % ";
+      document.getElementById("batterymeter").value = battery.level;
+    });
+  </script>
+</html>
